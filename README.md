@@ -19,3 +19,5 @@ button disable for a few sec: https://answers.unity.com/questions/774544/how-do-
 Spot Light object disable/enable: https://answers.unity.com/questions/1401879/toggle-light-component-on-and-off.html
 
 Coroutine for flashlight to turn on after few sec: https://answers.unity.com/questions/796881/c-how-can-i-let-something-happen-after-a-small-del.html
+
+Spawn System: https://www.youtube.com/watch?v=M_xXmpI0GYs
