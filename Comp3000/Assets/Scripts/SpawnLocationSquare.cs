@@ -6,8 +6,16 @@ public class SpawnLocationSquare : MonoBehaviour
 {
     public Vector3 radius;
 
+    public GameObject SCP106;
+
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SCP106.SetActive(true);
+            SCP106.transform.position = new Vector3(transform.position.x, 3.4f, transform.position.z);
+        }
+
         transform.position = new Vector3(transform.position.x, 3.4f, transform.position.z);
     }
 
@@ -16,4 +24,8 @@ public class SpawnLocationSquare : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(this.transform.position, radius);
     }
+
+    //void spawn()
+    //{
+    //}
 }

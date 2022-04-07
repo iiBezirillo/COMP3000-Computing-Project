@@ -28,6 +28,6 @@ public class Spawner : MonoBehaviour
     {
         toSpawnClone[0] = Instantiate(toSpawnPrefab[0], spawnLocations[0].transform.position,
             Quaternion.Euler(0, 0, 0)) as GameObject;
-
+        
     }
 }

@@ -21,3 +21,7 @@ Spot Light object disable/enable: https://answers.unity.com/questions/1401879/to
 Coroutine for flashlight to turn on after few sec: https://answers.unity.com/questions/796881/c-how-can-i-let-something-happen-after-a-small-del.html
 
 Spawn System: https://www.youtube.com/watch?v=M_xXmpI0GYs
+
+SCP-106 asset Credits: SCP-106 (version 2) - Aruspice (model, textures), Apocryphos (model)
+
+navMesh chase system: https://www.youtube.com/watch?v=KcyO1biSIOw&t=934s
