@@ -18,6 +18,9 @@ public class EnemyFollowAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        nav.SetDestination(player.position);
+        if(Time.time >= 5)
+        {
+            nav.SetDestination(player.position);   
+        }
     }
 }
