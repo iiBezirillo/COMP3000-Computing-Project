@@ -7,20 +7,49 @@ public class EnemyFollowAI : MonoBehaviour
 {
     private Transform player;
     private NavMeshAgent nav;
+    public GameObject SCP106;
+
+    public float countDown = 6;
+    public float disableCountDown = 15;
+
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        nav = GetComponent<NavMeshAgent>();
+
+        animator = GetComponentInChildren<Animator>();
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
+        //nav = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.time >= 5)
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        nav = GetComponent<NavMeshAgent>();
+
+        if (countDown > 0)
         {
-            nav.SetDestination(player.position);   
+            countDown -= Time.deltaTime;
+        }
+        else if(countDown < 0)
+        {
+            animator.SetBool("isChasing", true);
+            nav.SetDestination(player.position);
+        }
+
+        if (disableCountDown > 0)
+        {
+            disableCountDown -= Time.deltaTime;
+        }
+        else if (disableCountDown < 0)
+        {
+            countDown = 6;
+            disableCountDown = 15;
+            animator.SetBool("isChasing", false);
+
+            SCP106.SetActive(false);
         }
     }
 }

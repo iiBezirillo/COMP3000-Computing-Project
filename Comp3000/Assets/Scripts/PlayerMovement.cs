@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 50;
+
         lastTime = Time.time;
 
         crouchAnim = GetComponent<Animator>();
