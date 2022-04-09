@@ -25,3 +25,5 @@ Spawn System: https://www.youtube.com/watch?v=M_xXmpI0GYs
 SCP-106 asset Credits: SCP-106 (version 2) - Aruspice (model, textures), Apocryphos (model)
 
 navMesh chase system: https://www.youtube.com/watch?v=KcyO1biSIOw&t=934s
+
+Blood Splash image: https://pngset.com/download-free-png-geeiy

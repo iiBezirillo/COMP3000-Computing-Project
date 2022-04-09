@@ -10,7 +10,7 @@ public class EnemyFollowAI : MonoBehaviour
     public GameObject SCP106;
 
     public float countDown = 6;
-    public float disableCountDown = 15;
+    public float disableSCPCountDown = 15;
 
     Animator animator;
 
@@ -39,14 +39,14 @@ public class EnemyFollowAI : MonoBehaviour
             nav.SetDestination(player.position);
         }
 
-        if (disableCountDown > 0)
+        if (disableSCPCountDown > 0)
         {
-            disableCountDown -= Time.deltaTime;
+            disableSCPCountDown -= Time.deltaTime;
         }
-        else if (disableCountDown < 0)
+        else if (disableSCPCountDown < 0)
         {
             countDown = 6;
-            disableCountDown = 15;
+            disableSCPCountDown = 15;
             animator.SetBool("isChasing", false);
 
             SCP106.SetActive(false);
