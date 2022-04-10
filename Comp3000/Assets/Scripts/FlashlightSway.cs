@@ -19,9 +19,11 @@ public class FlashlightSway : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //gets y and x axis
         float movementX = -Input.GetAxis("Mouse X") * amount;
         float movementY = -Input.GetAxis("Mouse Y") * amount;
 
+        //sway flashlight
         Vector3 finalPosition = new Vector3(movementX, movementY, 0);
         transform.localPosition = Vector3.Lerp(transform.localPosition, finalPosition + initialPosition, Time.deltaTime * smoothAmount);
     }

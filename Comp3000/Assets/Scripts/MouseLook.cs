@@ -14,12 +14,14 @@ public class MouseLook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //hide mouse on play
         Cursor.lockState = CursorLockMode.Locked; 
     }
 
     // Update is called once per frame
     void Update()
     {
+        //simple code for controlling the camera with mouse
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 

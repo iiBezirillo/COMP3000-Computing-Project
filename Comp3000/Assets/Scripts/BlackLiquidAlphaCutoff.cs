@@ -6,27 +6,30 @@ public class BlackLiquidAlphaCutoff : MonoBehaviour
 {
     public GameObject liquid;
     public Material blackSplatter;
-    public float health;
-    public float maxHealth;
+    public float time = 100;
+    public float maxTime = 100;
 
     public float disableLiquidCountDown = 15;
 
     // Start is called before the first frame update
     void Start()
     {
-        blackSplatter.SetFloat("_Cutoff", health / maxHealth);
+        blackSplatter.SetFloat("_Cutoff", time / maxTime);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (health >= 15)
+        //removes 10 time every Time.deltaTime if time >=15
+        if (time >= 15)
         {
-            health -= 10 * Time.deltaTime;
-            blackSplatter.SetFloat("_Cutoff", health / maxHealth);
+            time -= 10 * Time.deltaTime;
+            //compares time from maxTime
+            blackSplatter.SetFloat("_Cutoff", time / maxTime);
         }
 
 
+        //countDown for disabling black liquid and resetting time
         if (disableLiquidCountDown > 0)
         {
             disableLiquidCountDown -= Time.deltaTime;
@@ -36,8 +39,8 @@ public class BlackLiquidAlphaCutoff : MonoBehaviour
 
             disableLiquidCountDown = 15;
 
-            health = 100;
-            maxHealth = 100;
+            time = 100;
+            maxTime = 100;
 
             liquid.SetActive(false);
         }

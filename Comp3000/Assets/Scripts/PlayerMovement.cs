@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 10;
 
     public float gravity = -9.81f;
+
     //jump
     //public float jumpHeight = 3f;
 
@@ -25,15 +26,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        //framerate set to approx 50 for my pc to live longer
         Application.targetFrameRate = 50;
 
         lastTime = Time.time;
 
+        //gets crouch animation component
         crouchAnim = GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
     {
+        //ground check 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
@@ -41,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
+        //simple movement code
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
@@ -58,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
+        // if c is pressed crouch if not crouch and not crouch if crouch
         if (Input.GetKeyDown("c") && (Time.time - lastTime > 1))
         {
             if(speed == 10f)
@@ -83,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
             lastTime = Time.time;
         }
 
+        //if shift is pressed then take speed and add five to run
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (speed == 10)
@@ -91,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
+        //if shift is pressed no more then take speed == 15 and take away 5 to walk
         else if(Input.GetKeyUp(KeyCode.LeftShift))
         {
             if (speed == 15f)

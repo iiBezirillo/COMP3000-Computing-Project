@@ -17,6 +17,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //when pressed space execute spawn
         if (Input.GetKeyDown(KeyCode.Space))
         {
             spawn();
@@ -24,6 +25,7 @@ public class Spawner : MonoBehaviour
 
     }
 
+    //spawn method to spawn a clone
     void spawn()
     {
         toSpawnClone[0] = Instantiate(toSpawnPrefab[0], spawnLocations[0].transform.position,
