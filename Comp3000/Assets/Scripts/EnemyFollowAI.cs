@@ -6,77 +6,97 @@ using UnityEngine.AI;
 public class EnemyFollowAI : MonoBehaviour
 {
     private Transform player;
-    private Transform ScpPos;
+    private Transform navScpPos;
+
     private NavMeshAgent nav;
     public GameObject SCP106;
     public GameObject deSpawnLiquid;
+    public GameObject spawnLiquid;
 
-    private float valuesReset = 10;
+    private float valuesReset = 5;
     public float countDown;
-    public float deSpawnCountDown = 10;
+    public float deSpawnCountDown = 3;
     public float disableSCPCountDown = 13;
 
     Animator animator;
+    public Animator animDeSpawnLiquid;
+    public Animator animSpawnLiquid;
 
     // Start is called before the first frame update
     void Start()
     {
         //gets animator from Scp-106 prefab
         animator = GetComponentInChildren<Animator>();
-
-        //player = GameObject.FindGameObjectWithTag("Player").transform;
-        //nav = GetComponent<NavMeshAgent>();
+        animDeSpawnLiquid = animDeSpawnLiquid.GetComponent<Animator>();
+        animSpawnLiquid = animSpawnLiquid.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
         //finds objects with the "Player" tag 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         //finds Scp-106 with the "Scp106" tag
-        ScpPos = GameObject.FindGameObjectWithTag("Scp106").transform;
+        navScpPos = GameObject.FindGameObjectWithTag("Scp106").transform;
+
         //gets navMeshAgent component
         nav = GetComponent<NavMeshAgent>();
 
-        //if count down is > 0 then start start timer
+        //if count down is > 0 then start spawn timer
         if (countDown > 0)
         {
             countDown -= Time.deltaTime;
+
+            //enable spawn liquid 
+            spawnLiquid.SetActive(true);
+            //make sure liquid spawns correctly to the ground
+            spawnLiquid.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
+
+            if(countDown < 6 && countDown > 5.95f)
+            {
+                animSpawnLiquid.SetTrigger("beforeStart");
+            }
+
         }
         //if count down is < 0 start chasing with destination the player
         else if(countDown < 0)
         {
             animator.SetBool("isChasing", true);
             nav.SetDestination(player.position);
+
+            disableSCPCountDown -= Time.deltaTime;
+
+            //count down for disabling SCP-106 
+            if (disableSCPCountDown <= 3)
+            {
+                deSpawnCountDown -= Time.deltaTime;
+            }
         }
 
         //if this countdown starts despawn anim will begin
-        if (deSpawnCountDown > 0)
-        {
-            deSpawnCountDown -= Time.deltaTime;
-        }
-        else if (deSpawnCountDown < 0)
+        if (deSpawnCountDown < 3)
         {
             animator.SetBool("stopChasing", true);
-            nav.SetDestination(ScpPos.position);
+            nav.SetDestination(navScpPos.position);
 
-            //enable black liquid 
+            //enable deSpawn liquid 
             deSpawnLiquid.SetActive(true);
             //make sure liquid spawns correctly to the ground
-            deSpawnLiquid.transform.position = new Vector3(ScpPos.transform.position.x, .1f, ScpPos.transform.position.z);
+            deSpawnLiquid.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
+
+            if(deSpawnCountDown < 3 && deSpawnCountDown > 2.95)
+            {
+                animDeSpawnLiquid.SetTrigger("beforeStart");
+            }
+
         }
 
-        //count down for disabling SCP-106 
-        if (disableSCPCountDown > 0)
-        {
-            disableSCPCountDown -= Time.deltaTime;
-        }
-        //after count down reset some values, chase no more and disable SCP-106 object
-        else if (disableSCPCountDown < 0)
+        if (disableSCPCountDown < 0)
         {
             countDown = 6;
-            deSpawnCountDown = valuesReset + 5;
-            disableSCPCountDown = valuesReset + 7;
+            deSpawnCountDown = 3;
+            disableSCPCountDown = valuesReset;
             animator.SetBool("isChasing", false);
             animator.SetBool("stopChasing", false);
 
