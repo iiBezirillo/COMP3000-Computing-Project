@@ -13,23 +13,33 @@ public class EnemyFollowAI : MonoBehaviour
     public GameObject deSpawnLiquid;
     public GameObject spawnLiquid;
 
-    private float valuesReset = 5;
-    public float countDown;
-    public float deSpawnCountDown = 3;
+    private float valuesReset = 7;
+    public float countDown = 6;
+    private float deSpawnCountDown = 3;
     public float disableSCPCountDown = 13;
 
     Animator animator;
-    public Animator animDeSpawnLiquid;
     public Animator animSpawnLiquid;
+    public Animator animDeSpawnLiquid;
+    public Animator Scp106;
+
+
+    public Collider handColl;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        //gets animator from Scp-106 prefab
+        //gets animators
         animator = GetComponentInChildren<Animator>();
         animDeSpawnLiquid = animDeSpawnLiquid.GetComponent<Animator>();
         animSpawnLiquid = animSpawnLiquid.GetComponent<Animator>();
+        Scp106 = Scp106.GetComponent<Animator>();
+
+        //Fetch scp's Collider
+        handColl = GetComponent<Collider>();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -53,11 +63,10 @@ public class EnemyFollowAI : MonoBehaviour
             //make sure liquid spawns correctly to the ground
             spawnLiquid.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
 
-            if(countDown < 6 && countDown > 5.95f)
+            if (countDown < 6 && countDown > 5.95f)
             {
                 animSpawnLiquid.SetTrigger("beforeStart");
             }
-
         }
         //if count down is < 0 start chasing with destination the player
         else if(countDown < 0)
@@ -67,12 +76,15 @@ public class EnemyFollowAI : MonoBehaviour
 
             disableSCPCountDown -= Time.deltaTime;
 
+            handColl.enabled = true;
+
             //count down for disabling SCP-106 
             if (disableSCPCountDown <= 3)
             {
                 deSpawnCountDown -= Time.deltaTime;
             }
         }
+
 
         //if this countdown starts despawn anim will begin
         if (deSpawnCountDown < 3)
@@ -85,7 +97,10 @@ public class EnemyFollowAI : MonoBehaviour
             //make sure liquid spawns correctly to the ground
             deSpawnLiquid.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
 
-            if(deSpawnCountDown < 3 && deSpawnCountDown > 2.95)
+            Scp106.SetTrigger("armDown");
+            handColl.enabled = false;
+
+            if (deSpawnCountDown < 3 && deSpawnCountDown > 2.95)
             {
                 animDeSpawnLiquid.SetTrigger("beforeStart");
             }
@@ -102,5 +117,17 @@ public class EnemyFollowAI : MonoBehaviour
 
             SCP106.SetActive(false);
         }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        
+        Scp106.SetTrigger("armUp");
+        
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        Scp106.SetTrigger("armDown");
     }
 }

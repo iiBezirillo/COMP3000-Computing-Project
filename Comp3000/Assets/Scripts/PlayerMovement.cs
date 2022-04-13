@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     float lastTime;
 
     public Animator crouchAnim;
+    
+
 
     private void Start()
     {
@@ -33,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
         //gets crouch animation component
         crouchAnim = GetComponent<Animator>();
+        
     }
     // Update is called once per frame
     void Update()

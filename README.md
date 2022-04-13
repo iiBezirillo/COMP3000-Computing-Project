@@ -27,3 +27,7 @@ SCP-106 asset Credits: SCP-106 (version 2) - Aruspice (model, textures), Apocryp
 navMesh chase system: https://www.youtube.com/watch?v=KcyO1biSIOw&t=934s
 
 Blood Splash image: https://pngset.com/download-free-png-geeiy
+
+play multiple animations: https://www.youtube.com/watch?v=PCNxZSeNhA4&t=19s
+
+Colliders: https://docs.unity3d.com/ScriptReference/Collider-enabled.html
