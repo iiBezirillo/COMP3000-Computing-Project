@@ -31,3 +31,5 @@ Blood Splash image: https://pngset.com/download-free-png-geeiy
 play multiple animations: https://www.youtube.com/watch?v=PCNxZSeNhA4&t=19s
 
 Colliders: https://docs.unity3d.com/ScriptReference/Collider-enabled.html
+
+Invoke repeat: https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html

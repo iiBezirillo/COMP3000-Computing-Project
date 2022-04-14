@@ -20,9 +20,11 @@ public class SpawnLocationSquare : MonoBehaviour
             SCP106.SetActive(true);
             //make sure he spawns correctly to the ground
             SCP106.transform.position = new Vector3(transform.position.x, 2.632f, transform.position.z);
+            SCP106.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
         }
 
         transform.position = new Vector3(transform.position.x, 3.4f, transform.position.z);
+        //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
     }
 
     private void OnDrawGizmos()

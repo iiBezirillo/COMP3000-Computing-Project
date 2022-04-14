@@ -5,26 +5,38 @@ using UnityEngine.AI;
 
 public class EnemyFollowAI : MonoBehaviour
 {
+    [Header("Transforms")]
     private Transform player;
     private Transform navScpPos;
 
+    [Header("NavMesh")]
     private NavMeshAgent nav;
+
+    [Header("Game Objects")]
     public GameObject SCP106;
     public GameObject deSpawnLiquid;
     public GameObject spawnLiquid;
+    public GameObject trailLiquid;
+    public GameObject cloneTrailLiquid;
 
-    private float valuesReset = 7;
-    public float countDown = 6;
-    private float deSpawnCountDown = 3;
+    [Header("Timers")]
+    public float valuesReset = 7;
+    public float spawnCountDown = 6;
+    public float deSpawnCountDown = 3;
     public float disableSCPCountDown = 13;
+    public float trailTime = 0;
 
     Animator animator;
+    [Header("Animators")]
     public Animator animSpawnLiquid;
     public Animator animDeSpawnLiquid;
+    public Animator animTrailLiquid;
     public Animator Scp106;
 
-
+    [Header("Colliders")]
     public Collider handColl;
+
+    bool invokeOnce = false;
 
 
     // Start is called before the first frame update
@@ -34,10 +46,11 @@ public class EnemyFollowAI : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         animDeSpawnLiquid = animDeSpawnLiquid.GetComponent<Animator>();
         animSpawnLiquid = animSpawnLiquid.GetComponent<Animator>();
+        animTrailLiquid = animTrailLiquid.GetComponent<Animator>();
         Scp106 = Scp106.GetComponent<Animator>();
 
         //Fetch scp's Collider
-        handColl = GetComponent<Collider>();
+        handColl = GetComponent<Collider>();     
     }
 
 
@@ -54,22 +67,23 @@ public class EnemyFollowAI : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
 
         //if count down is > 0 then start spawn timer
-        if (countDown > 0)
+        if (spawnCountDown > 0)
         {
-            countDown -= Time.deltaTime;
+            spawnCountDown -= Time.deltaTime;
 
             //enable spawn liquid 
             spawnLiquid.SetActive(true);
             //make sure liquid spawns correctly to the ground
             spawnLiquid.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
 
-            if (countDown < 6 && countDown > 5.95f)
+            if (spawnCountDown < 6 && spawnCountDown > 5.95f)
             {
                 animSpawnLiquid.SetTrigger("beforeStart");
             }
+
         }
         //if count down is < 0 start chasing with destination the player
-        else if(countDown < 0)
+        else if(spawnCountDown < 0)
         {
             animator.SetBool("isChasing", true);
             nav.SetDestination(player.position);
@@ -82,6 +96,25 @@ public class EnemyFollowAI : MonoBehaviour
             if (disableSCPCountDown <= 3)
             {
                 deSpawnCountDown -= Time.deltaTime;
+            }
+
+            
+            //~trailLiquid~
+            if (spawnCountDown < 0 && disableSCPCountDown > 5)
+            {
+                if (!invokeOnce)
+                {
+                    //enable spawn liquid 
+                    trailLiquid.SetActive(true);
+                    InvokeRepeating("spawnTrailLiquid", 0.3f, 0.3f);
+                    invokeOnce = true;
+                }
+            }
+            else if (deSpawnCountDown < 3)
+            {
+                CancelInvoke();
+                trailLiquid.SetActive(false);
+                invokeOnce = false;
             }
         }
 
@@ -99,6 +132,8 @@ public class EnemyFollowAI : MonoBehaviour
 
             Scp106.SetTrigger("armDown");
             handColl.enabled = false;
+            
+            CancelInvoke();
 
             if (deSpawnCountDown < 3 && deSpawnCountDown > 2.95)
             {
@@ -109,7 +144,7 @@ public class EnemyFollowAI : MonoBehaviour
 
         if (disableSCPCountDown < 0)
         {
-            countDown = 6;
+            spawnCountDown = 6;
             deSpawnCountDown = 3;
             disableSCPCountDown = valuesReset;
             animator.SetBool("isChasing", false);
@@ -129,5 +164,12 @@ public class EnemyFollowAI : MonoBehaviour
     public void OnTriggerExit(Collider other)
     {
         Scp106.SetTrigger("armDown");
+    }
+
+    public void spawnTrailLiquid()
+    {
+        cloneTrailLiquid = Instantiate(trailLiquid);
+        cloneTrailLiquid.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
+        cloneTrailLiquid.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
     }
 }

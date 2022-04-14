@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackLiquidAlphaCutoff : MonoBehaviour
+public class BlackLiquidTrail : MonoBehaviour
 {
     public GameObject liquid;
 
@@ -10,7 +10,6 @@ public class BlackLiquidAlphaCutoff : MonoBehaviour
 
     public float time = 100;
     public float maxTime = 100;
-    public float currentXPosition;
 
     Animator animator;
 
@@ -26,23 +25,11 @@ public class BlackLiquidAlphaCutoff : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //check for time>=15 and if liquid position is != currentXPosition
-        if (time >= 15 && liquid.transform.position.x != currentXPosition)
+        if (time >= 50)
         {
-            //removes 10 time every Time.deltaTime if time >=15
             time -= 10 * Time.deltaTime;
             //compares time from maxTime
             blackSplatter.SetFloat("_Cutoff", time / maxTime);
-
-            animator.SetTrigger("afterStart");
-        }
-
-        
-        //check if time<=15 and if currentXPosition != liquid.transform.position.x
-        if (time <= 15 && currentXPosition != liquid.transform.position.x)
-        {
-            time = 100;
-            currentXPosition = liquid.transform.position.x;
         }
     }
 }

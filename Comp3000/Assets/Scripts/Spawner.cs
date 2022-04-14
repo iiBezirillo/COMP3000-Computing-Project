@@ -4,32 +4,42 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public Transform[] spawnLocations;
-    public GameObject[] toSpawnPrefab;
-    public GameObject[] toSpawnClone;
+    //public Transform spawnLocations;
+    public GameObject toSpawnPrefab;
+    public GameObject toSpawnClone;
+
+    public GameObject trail;
+    //public EnemyFollowAI enemyFollowAI;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        trail = GameObject.FindWithTag("Trail");
+        //enemyFollowAI = Scp106.GetComponent<EnemyFollowAI>();
+
+        InvokeRepeating("spawn", 6.5f, 0.5f);
+
+        trail.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //when pressed space execute spawn
-        if (Input.GetKeyDown(KeyCode.Space))
+        toSpawnClone.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
+        toSpawnClone.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            spawn();
+            trail.SetActive(false);
         }
+
 
     }
 
     //spawn method to spawn a clone
     void spawn()
     {
-        toSpawnClone[0] = Instantiate(toSpawnPrefab[0], spawnLocations[0].transform.position,
-            Quaternion.Euler(0, 0, 0)) as GameObject;
+        toSpawnClone = Instantiate(toSpawnPrefab) as GameObject;
         
     }
 }
