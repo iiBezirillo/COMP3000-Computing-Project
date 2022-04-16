@@ -21,7 +21,7 @@ public class EnemyFollowAI : MonoBehaviour
 
     [Header("Timers")]
     public float valuesReset = 7;
-    public float spawnCountDown = 6;
+    public float spawnCountDown = 4;
     public float deSpawnCountDown = 3;
     public float disableSCPCountDown = 13;
     public float trailTime = 0;
@@ -76,7 +76,7 @@ public class EnemyFollowAI : MonoBehaviour
             //make sure liquid spawns correctly to the ground
             spawnLiquid.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
 
-            if (spawnCountDown < 6 && spawnCountDown > 5.95f)
+            if (spawnCountDown < 4 && spawnCountDown > 3.95f)
             {
                 animSpawnLiquid.SetTrigger("beforeStart");
             }
@@ -100,7 +100,7 @@ public class EnemyFollowAI : MonoBehaviour
 
             
             //~trailLiquid~
-            if (spawnCountDown < 0 && disableSCPCountDown > 5)
+            if (spawnCountDown < 0 && disableSCPCountDown > 3)
             {
                 if (!invokeOnce)
                 {
@@ -144,7 +144,7 @@ public class EnemyFollowAI : MonoBehaviour
 
         if (disableSCPCountDown < 0)
         {
-            spawnCountDown = 6;
+            spawnCountDown = 4;
             deSpawnCountDown = 3;
             disableSCPCountDown = valuesReset;
             animator.SetBool("isChasing", false);

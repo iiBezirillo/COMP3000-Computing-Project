@@ -33,3 +33,7 @@ play multiple animations: https://www.youtube.com/watch?v=PCNxZSeNhA4&t=19s
 Colliders: https://docs.unity3d.com/ScriptReference/Collider-enabled.html
 
 Invoke repeat: https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
+
+Images by  DarkUnknownWarrior: 
+https://villains.fandom.com/wiki/SCP-106/Gallery?file=Scp106.jpg
+https://villains.fandom.com/wiki/SCP-106/Gallery?file=SCP1063.jpg
