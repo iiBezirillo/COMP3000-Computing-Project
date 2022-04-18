@@ -37,3 +37,7 @@ Invoke repeat: https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepe
 Images by  DarkUnknownWarrior: 
 https://villains.fandom.com/wiki/SCP-106/Gallery?file=Scp106.jpg
 https://villains.fandom.com/wiki/SCP-106/Gallery?file=SCP1063.jpg
+
+terrain & environment:
+https://www.youtube.com/watch?v=smnLYvF40s4
+https://www.youtube.com/watch?v=ddy12WHqt-M&t=10s
