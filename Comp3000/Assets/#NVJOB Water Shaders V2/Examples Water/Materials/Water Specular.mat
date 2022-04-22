@@ -147,8 +147,8 @@ Material:
     m_Floats:
     - _Albedo2Flow: 0.3
     - _Albedo2Tiling: 0.9
-    - _AlbedoContrast: 1.4
-    - _AlbedoIntensity: 2.55
+    - _AlbedoContrast: 1.89
+    - _AlbedoIntensity: 1.59
     - _Brightness: 1
     - _BumpScale: 1
     - _Contrast: 1
