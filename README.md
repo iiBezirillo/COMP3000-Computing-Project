@@ -41,3 +41,5 @@ https://villains.fandom.com/wiki/SCP-106/Gallery?file=SCP1063.jpg
 terrain & environment:
 https://www.youtube.com/watch?v=smnLYvF40s4
 https://www.youtube.com/watch?v=ddy12WHqt-M&t=10s
+
+game over image, Spray texture photo created by vector_corp: https://www.freepik.com/photos/spray-texture 

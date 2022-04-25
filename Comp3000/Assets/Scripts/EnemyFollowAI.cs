@@ -18,6 +18,7 @@ public class EnemyFollowAI : MonoBehaviour
     public GameObject spawnLiquid;
     public GameObject trailLiquid;
     public GameObject cloneTrailLiquid;
+    public GameObject spawnLocation;
 
     [Header("Timers")]
     public float valuesReset = 7;
@@ -74,7 +75,7 @@ public class EnemyFollowAI : MonoBehaviour
             //enable spawn liquid 
             spawnLiquid.SetActive(true);
             //make sure liquid spawns correctly to the ground
-            spawnLiquid.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
+            spawnLiquid.transform.position = new Vector3(transform.position.x, transform.position.y - 2.1f, transform.position.z);
 
             if (spawnCountDown < 4 && spawnCountDown > 3.95f)
             {
@@ -128,7 +129,7 @@ public class EnemyFollowAI : MonoBehaviour
             //enable deSpawn liquid 
             deSpawnLiquid.SetActive(true);
             //make sure liquid spawns correctly to the ground
-            deSpawnLiquid.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
+            deSpawnLiquid.transform.position = new Vector3(transform.position.x, transform.position.y - 2.1f, transform.position.z);
 
             Scp106.SetTrigger("armDown");
             handColl.enabled = false;
@@ -151,6 +152,8 @@ public class EnemyFollowAI : MonoBehaviour
             animator.SetBool("stopChasing", false);
 
             SCP106.SetActive(false);
+            SCP106.transform.SetParent(player);
+            SCP106.transform.position = spawnLocation.transform.position;
         }
     }
 
@@ -169,7 +172,7 @@ public class EnemyFollowAI : MonoBehaviour
     public void spawnTrailLiquid()
     {
         cloneTrailLiquid = Instantiate(trailLiquid);
-        cloneTrailLiquid.transform.position = new Vector3(transform.position.x, 0.01f, transform.position.z);
+        cloneTrailLiquid.transform.position = new Vector3(transform.position.x, transform.position.y - 2.1f, transform.position.z);
         cloneTrailLiquid.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
     }
 }

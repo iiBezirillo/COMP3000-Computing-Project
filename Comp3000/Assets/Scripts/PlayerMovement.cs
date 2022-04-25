@@ -4,26 +4,33 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Character Controller")]
     public CharacterController controller;
 
+    [Header("floats")]
     public float speed = 10;
-
     public float gravity = -9.81f;
+    public float groundDistance = 0.4f;
+    float lastTime;
 
     //jump
     //public float jumpHeight = 3f;
 
+    [Header("Transforms")]
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+
+    [Header("Layer Mask")]
     public LayerMask groundMask;
 
     Vector3 velocity;
     bool isGrounded;
 
-    float lastTime;
 
-    public Animator crouchAnim;
-    
+    [Header("Animators")]
+    public Animator playerAnimator;
+
+    [Header("Colliders")]
+    public Collider death;
 
 
     private void Start()
@@ -34,8 +41,10 @@ public class PlayerMovement : MonoBehaviour
         lastTime = Time.time;
 
         //gets crouch animation component
-        crouchAnim = GetComponent<Animator>();
-        
+        playerAnimator = GetComponent<Animator>();
+
+        //fetch player collider
+        death = GetComponent<Collider>();
     }
     // Update is called once per frame
     void Update()
@@ -71,13 +80,13 @@ public class PlayerMovement : MonoBehaviour
         {
             if(speed == 10f)
             {
-                this.crouchAnim.GetCurrentAnimatorStateInfo(0).IsName("Crouch OFF");
+                this.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Crouch OFF");
                 speed = speed - 5f;
-                crouchAnim.Play("Crouch ON");
+                playerAnimator.Play("Crouch ON");
             }
             else if(speed == 5f)
             {
-                this.crouchAnim.GetCurrentAnimatorStateInfo(0).IsName("Crouch ON");
+                this.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Crouch ON");
 
                 StartCoroutine(ExecuteAfterTime(.30f));
                 IEnumerator ExecuteAfterTime(float time)
@@ -87,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
                     speed = speed + 5f;
 
                 }
-                crouchAnim.Play("Crouch OFF");
+                playerAnimator.Play("Crouch OFF");
             }
             lastTime = Time.time;
         }
@@ -110,4 +119,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    playerAnimator.Play("Death");
+    //}
 }
