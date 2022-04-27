@@ -45,3 +45,5 @@ https://www.youtube.com/watch?v=ddy12WHqt-M&t=10s
 game over image, Spray texture photo created by vector_corp: https://www.freepik.com/photos/spray-texture 
 
 raycast & interact with objects: https://www.youtube.com/watch?v=K9jnIPnsQ_w
+
+score UI: https://www.youtube.com/watch?v=TAGZxRMloyU

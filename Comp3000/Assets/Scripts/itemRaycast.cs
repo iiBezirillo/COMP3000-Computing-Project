@@ -19,6 +19,8 @@ public class itemRaycast : MonoBehaviour
 
     private const string interactableTag = "item";
 
+    public int score = 0;
+
     private void Update()
     {
         RaycastHit hit;
@@ -43,6 +45,7 @@ public class itemRaycast : MonoBehaviour
                 {
                     //rayCastedObj.pickUpItem();
                     hit.transform.gameObject.SetActive(false);
+                    score = score + 1;
                 }
             }
         }
