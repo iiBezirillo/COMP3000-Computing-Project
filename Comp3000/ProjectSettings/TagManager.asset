@@ -9,6 +9,7 @@ TagManager:
   - deSpawnLiquid
   - Trail
   - item
+  - spawnTrigger
   layers:
   - Default
   - TransparentFX
