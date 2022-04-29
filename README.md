@@ -34,6 +34,8 @@ Colliders: https://docs.unity3d.com/ScriptReference/Collider-enabled.html
 
 Invoke repeat: https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
 
+Flooded grounds: https://assetstore.unity.com/packages/3d/environments/flooded-grounds-48529
+
 Images by  DarkUnknownWarrior: 
 https://villains.fandom.com/wiki/SCP-106/Gallery?file=Scp106.jpg
 https://villains.fandom.com/wiki/SCP-106/Gallery?file=SCP1063.jpg
@@ -47,3 +49,5 @@ game over image, Spray texture photo created by vector_corp: https://www.freepik
 raycast & interact with objects: https://www.youtube.com/watch?v=K9jnIPnsQ_w
 
 score UI: https://www.youtube.com/watch?v=TAGZxRMloyU
+
+Spawn sound: julius_galla - https://freesound.org/people/julius_galla/sounds/322296/

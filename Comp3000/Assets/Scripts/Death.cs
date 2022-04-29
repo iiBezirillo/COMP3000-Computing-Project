@@ -40,5 +40,7 @@ public class Death : MonoBehaviour
         armature.GetComponent<FlashlightController>().enabled = false;
         deathCanvas.SetActive(true);
         enemyFollowAI.disableSCPCountDown = 3;
+        //FindObjectOfType<SoundManager>().Play("Kneel");
+
     }
 }

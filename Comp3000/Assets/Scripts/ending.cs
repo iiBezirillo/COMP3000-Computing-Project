@@ -57,5 +57,6 @@ public class ending : MonoBehaviour
         spawnTrigger.SetActive(false);
         playerMovement.speed = 1;
         mouseLook.mouseSensitivity = 20;
+        FindObjectOfType<SoundManager>().Play("Kneel");
     }
 }

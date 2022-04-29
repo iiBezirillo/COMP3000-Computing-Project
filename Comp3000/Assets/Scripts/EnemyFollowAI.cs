@@ -19,12 +19,12 @@ public class EnemyFollowAI : MonoBehaviour
     public GameObject trailLiquid;
     public GameObject cloneTrailLiquid;
     public GameObject spawnLocation;
+    public GameObject playerCamera;
 
     [Header("Timers")]
-    public float valuesReset = 7;
     public float spawnCountDown = 4;
     public float deSpawnCountDown = 3;
-    public float disableSCPCountDown = 13;
+    public float disableSCPCountDown = 41;
     public float trailTime = 0;
 
     Animator animator;
@@ -51,14 +51,13 @@ public class EnemyFollowAI : MonoBehaviour
         Scp106 = Scp106.GetComponent<Animator>();
 
         //Fetch scp's Collider
-        handColl = GetComponent<Collider>();     
+        handColl = GetComponent<Collider>();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-
         //finds objects with the "Player" tag 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         //finds Scp-106 with the "Scp106" tag
@@ -70,6 +69,7 @@ public class EnemyFollowAI : MonoBehaviour
         //if count down is > 0 then start spawn timer
         if (spawnCountDown > 0)
         {
+
             spawnCountDown -= Time.deltaTime;
 
             //enable spawn liquid 
@@ -81,7 +81,6 @@ public class EnemyFollowAI : MonoBehaviour
             {
                 animSpawnLiquid.SetTrigger("beforeStart");
             }
-
         }
         //if count down is < 0 start chasing with destination the player
         else if(spawnCountDown < 0)
@@ -93,13 +92,14 @@ public class EnemyFollowAI : MonoBehaviour
 
             handColl.enabled = true;
 
+
             //count down for disabling SCP-106 
             if (disableSCPCountDown <= 3)
             {
                 deSpawnCountDown -= Time.deltaTime;
             }
 
-            
+
             //~trailLiquid~
             if (spawnCountDown < 0 && disableSCPCountDown > 3)
             {
@@ -116,6 +116,9 @@ public class EnemyFollowAI : MonoBehaviour
                 CancelInvoke();
                 trailLiquid.SetActive(false);
                 invokeOnce = false;
+
+                //fade chaseSong
+                FindObjectOfType<SoundManager>().Fade("chaseSong", 2, .1f);
             }
         }
 
@@ -147,13 +150,19 @@ public class EnemyFollowAI : MonoBehaviour
         {
             spawnCountDown = 4;
             deSpawnCountDown = 3;
-            disableSCPCountDown = valuesReset;
+            disableSCPCountDown = 41;
             animator.SetBool("isChasing", false);
             animator.SetBool("stopChasing", false);
 
             SCP106.SetActive(false);
             SCP106.transform.SetParent(player);
             SCP106.transform.position = spawnLocation.transform.position;
+
+            //stop Chase Song            
+            FindObjectOfType<SoundManager>().Stop("chaseSong");
+            FindObjectOfType<SoundManager>().Play("SCP106 Laugh");
+
+
         }
     }
 

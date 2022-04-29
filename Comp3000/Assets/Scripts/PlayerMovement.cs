@@ -35,8 +35,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        //framerate set to approx 50 for my pc to live longer
-        Application.targetFrameRate = 50;
 
         lastTime = Time.time;
 

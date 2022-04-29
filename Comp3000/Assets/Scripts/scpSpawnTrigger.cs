@@ -24,6 +24,5 @@ public class scpSpawnTrigger : MonoBehaviour
     {
         spawnLocationSquare.spawnTrigger();
         spawnTrigger.SetActive(false);
-        
     }
 }

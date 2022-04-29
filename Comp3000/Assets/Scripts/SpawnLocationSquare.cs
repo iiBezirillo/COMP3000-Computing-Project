@@ -44,5 +44,11 @@ public class SpawnLocationSquare : MonoBehaviour
         SCP106.transform.position = SpawnLocation.transform.position;
         SCP106.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
         SCP106.transform.SetParent(null);
+
+        //sound
+        FindObjectOfType<SoundManager>().Play("spawnSound");
+        FindObjectOfType<SoundManager>().Fade("chaseSong", 2, 1f);
+        FindObjectOfType<SoundManager>().Play("chaseSong");
+
     }
 }

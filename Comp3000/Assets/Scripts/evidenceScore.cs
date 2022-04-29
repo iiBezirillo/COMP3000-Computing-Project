@@ -28,6 +28,13 @@ public class evidenceScore : MonoBehaviour
             previousScore = previousScore + 1;
             canvasAnim.Play("scoreAnimation", -1, 0);
         }
-        scoreText.text = raycastScript.score.ToString() + "/5 evidence found";
+        if (previousScore <= 4)
+        {
+            scoreText.text = raycastScript.score.ToString() + "/5 evidence found";
+        }
+        else if (previousScore == 5)
+        {
+            scoreText.text = raycastScript.score.ToString() + "/5 evidence found. " + "All Evidence Collected. " + "Better get to the car.";
+        }
     }
 }
