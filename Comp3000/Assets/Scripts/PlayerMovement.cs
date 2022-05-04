@@ -8,11 +8,12 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
 
     [Header("floats")]
-    public float speed = 10;
+    public float speed = 7;
     public float gravity = -9.81f;
     public float groundDistance = 0.4f;
     float lastTime;
-    
+    public bool soundWalk = false;
+
     //jump
     //public float jumpHeight = 3f;
 
@@ -32,10 +33,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Colliders")]
     public Collider death;
 
+    //sound parameters
+    [SerializeField] private bool soundOn;
 
     private void Start()
     {
-
+        
         lastTime = Time.time;
 
         //gets crouch animation component
@@ -43,6 +46,9 @@ public class PlayerMovement : MonoBehaviour
 
         //fetch player collider
         death = GetComponent<Collider>();
+
+        FindObjectOfType<SoundManager>().Play("grassFootstep");
+
     }
     // Update is called once per frame
     void Update()
@@ -73,13 +79,25 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
+        if (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d")
+           || Input.GetKey("w") && Input.GetKey("a") || Input.GetKey("w") && Input.GetKey("d"))
+        {
+            FindObjectOfType<SoundManager>().Fade("grassFootstep", .2f, .2f);
+
+        }
+        else if (Input.GetKeyUp("w") || Input.GetKeyUp("a") || Input.GetKeyUp("s") || Input.GetKeyUp("d"))
+        {
+            FindObjectOfType<SoundManager>().Fade("grassFootstep", .2f, 0f);
+        }
+
+
         // if c is pressed crouch if not crouch and not crouch if crouch
         if (Input.GetKeyDown("c") && (Time.time - lastTime > 1))
         {
-            if(speed == 10f)
+            if(speed == 7f)
             {
                 this.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Crouch OFF");
-                speed = speed - 5f;
+                speed = speed - 2f;
                 playerAnimator.Play("Crouch ON");
             }
             else if(speed == 5f)
@@ -91,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     yield return new WaitForSeconds(time);
                     
-                    speed = speed + 5f;
+                    speed = speed + 2f;
 
                 }
                 playerAnimator.Play("Crouch OFF");
@@ -102,24 +120,19 @@ public class PlayerMovement : MonoBehaviour
         //if shift is pressed then take speed and add five to run
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (speed == 10)
+            if (speed == 7)
             {
-                speed = speed + 5;
+                speed = speed + 3;
 
             }
         }
         //if shift is pressed no more then take speed == 15 and take away 5 to walk
         else if(Input.GetKeyUp(KeyCode.LeftShift))
         {
-            if (speed == 15f)
+            if (speed == 10f)
             {
-                speed = speed - 5f;
+                speed = speed - 3f;
             }
         }
     }
-
-    //public void OnTriggerEnter(Collider other)
-    //{
-    //    playerAnimator.Play("Death");
-    //}
 }

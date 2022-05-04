@@ -30,6 +30,7 @@ public class FlashlightController : MonoBehaviour
         //press g to show/hide flashlight
         if (Input.GetKeyDown("g") && (Time.time - lastTime > 1))
         {
+
             //if "Show Flashlight" anim is in place 
             if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Show Flashlight"))
             {
@@ -47,6 +48,19 @@ public class FlashlightController : MonoBehaviour
             }
             //if "Hide Flashlight" anim is in place 
             else if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Hide Flashlight"))
+            {
+                //enables the spot light
+                anim.Play("Show Flashlight");
+
+                StartCoroutine(ExecuteAfterTime(1));
+                IEnumerator ExecuteAfterTime(float time)
+                {
+                    yield return new WaitForSeconds(time);
+
+                    myLightComponent.enabled = myLightComponent;
+                }
+            }
+            else if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("idleState"))
             {
                 //enables the spot light
                 anim.Play("Show Flashlight");

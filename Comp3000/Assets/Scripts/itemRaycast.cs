@@ -46,6 +46,9 @@ public class itemRaycast : MonoBehaviour
                     //rayCastedObj.pickUpItem();
                     hit.transform.gameObject.SetActive(false);
                     score = score + 1;
+
+                    //pickUp sound
+                    FindObjectOfType<SoundManager>().Play("pickUp");
                 }
             }
         }

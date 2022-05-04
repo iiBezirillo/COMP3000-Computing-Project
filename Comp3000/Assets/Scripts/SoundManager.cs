@@ -49,8 +49,9 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        // Add this part after having a theme song
-        // Play('Theme');
+        //Background theme
+        //Play("background2");
+        //Play("smoothWind");
     }
 
 
