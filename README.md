@@ -4,7 +4,7 @@ ________________________________________________________________________________
 COPYRIGHT WARNING:
 NO ONE ELSE CAN RE-DISTRIBUTE MY GAME ON ANY PLATFORM.
 IF YOU WANT TO UPLOAD ANY KIND OF MUSIC/SOUNDS ON ANY WEBSITE 
-YOU WILL HAVE TO SEE ASK/SEE WHAT LICENCE IT FALLS UNDER.
+YOU WILL HAVE TO ASK/SEE WHAT LICENCE IT FALLS UNDER.
 
 
 ________________________________________________________________________________________________________

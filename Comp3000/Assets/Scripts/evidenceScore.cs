@@ -28,7 +28,11 @@ public class evidenceScore : MonoBehaviour
             previousScore = previousScore + 1;
             canvasAnim.Play("scoreAnimation", -1, 0);
         }
-        if (previousScore <= 4)
+        if(previousScore == 0)
+        {
+            scoreText.text = raycastScript.score.ToString() + "/5 evidence found\n\nE = pick Items\nLeft Shift = Run\nG = Flashlight\n C = Crouch";
+        }
+        else if (previousScore >= 1 && previousScore <= 4)
         {
             scoreText.text = raycastScript.score.ToString() + "/5 evidence found";
         }

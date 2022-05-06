@@ -35,6 +35,7 @@ public class FlashlightController : MonoBehaviour
             if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Show Flashlight"))
             {
                 myLightComponent.enabled = !myLightComponent;
+                FindObjectOfType<SoundManager>().Play("flashlightClick1");
 
                 //Coroutine for a short delay
                 StartCoroutine(ExecuteAfterTime(.25f));
@@ -58,6 +59,7 @@ public class FlashlightController : MonoBehaviour
                     yield return new WaitForSeconds(time);
 
                     myLightComponent.enabled = myLightComponent;
+                    FindObjectOfType<SoundManager>().Play("flashlightClick2");
                 }
             }
             else if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("idleState"))
@@ -71,6 +73,7 @@ public class FlashlightController : MonoBehaviour
                     yield return new WaitForSeconds(time);
 
                     myLightComponent.enabled = myLightComponent;
+                    FindObjectOfType<SoundManager>().Play("flashlightClick2");
                 }
             }
             lastTime = Time.time;

@@ -7,6 +7,7 @@ public class quitBtn : MonoBehaviour
 {
     public GameObject button;
     Animator btnAnim;
+    public AudioSource soundButton;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,8 @@ public class quitBtn : MonoBehaviour
     public void OnMouseEnter()
     {
         btnAnim.Play("quitClick");
-
+        soundButton.Play();
+        
         StartCoroutine(ExecuteAfterTime(1));
     }
 

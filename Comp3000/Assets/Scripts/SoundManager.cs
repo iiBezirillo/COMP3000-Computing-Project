@@ -50,8 +50,8 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         //Background theme
-        //Play("background2");
-        //Play("smoothWind");
+        Play("background2");
+        Play("smoothWind");
     }
 
 
