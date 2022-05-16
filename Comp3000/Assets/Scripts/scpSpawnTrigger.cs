@@ -11,18 +11,16 @@ public class scpSpawnTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //gets SpawnLocationSquare script
         spawnLocationSquare = spawnLocation.GetComponent<SpawnLocationSquare>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
+    //when player enters the trigger
     private void OnTriggerEnter(Collider other)
     {
+        //call this method
         spawnLocationSquare.spawnTrigger();
+        //set spawntrigger to false
         spawnTrigger.SetActive(false);
     }
 }

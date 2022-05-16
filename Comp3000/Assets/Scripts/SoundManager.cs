@@ -54,7 +54,7 @@ public class SoundManager : MonoBehaviour
         Play("smoothWind");
     }
 
-
+    //play sound method
     public void Play(string name)
     {
         Sound sound = Array.Find(sounds, s => s.name == name);
@@ -70,6 +70,7 @@ public class SoundManager : MonoBehaviour
         sound.source.Play();
     }
 
+    //Stop sound method
     public void Stop(string name)
     {
         Sound sound = Array.Find(sounds, s => s.name == name);

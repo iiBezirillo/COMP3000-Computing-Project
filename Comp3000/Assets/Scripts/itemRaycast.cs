@@ -30,6 +30,7 @@ public class itemRaycast : MonoBehaviour
         //Debug.DrawRay(transform.position, fwd, Color.green);
         if (Physics.Raycast(transform.position, fwd, out hit, rayLength, mask))
         {
+            //if raycast hits the object
             if (hit.collider.CompareTag(interactableTag))
             {
                 if (!doOnce)
@@ -38,6 +39,7 @@ public class itemRaycast : MonoBehaviour
                     CrossHairChange(true);
                 }
 
+                //crosshair changes colour
                 isCrossHairActive = true;
                 doOnce = true;
 

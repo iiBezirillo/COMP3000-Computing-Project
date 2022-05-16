@@ -8,8 +8,7 @@ public class SpawnLocationSquare : MonoBehaviour
 
     public GameObject SCP106;
     public GameObject SpawnLocation;
-    //public GameObject spawnLiquid;
-    //public GameObject DeSpawnLiquid;
+
 
     void Update()
     {
@@ -25,14 +24,17 @@ public class SpawnLocationSquare : MonoBehaviour
         //    SCP106.transform.SetParent(null);
         //}
 
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
 
+    //a gizmos "window" that helps me see the spawn location
     private void OnDrawGizmos()
     {
-        //a "window" that helps me see the spawn location
+        //make gizmos green
         Gizmos.color = Color.green;
+        //draw a cube wire
         Gizmos.DrawWireCube(this.transform.position, radius);
     }
 
@@ -40,9 +42,11 @@ public class SpawnLocationSquare : MonoBehaviour
     {
         //enable SCP-106
         SCP106.SetActive(true);
-        //make sure he spawns correctly to the ground
+        //make sure he spawns correctly to the position
         SCP106.transform.position = SpawnLocation.transform.position;
         SCP106.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+
+        //leave the player parent
         SCP106.transform.SetParent(null);
 
         //sound

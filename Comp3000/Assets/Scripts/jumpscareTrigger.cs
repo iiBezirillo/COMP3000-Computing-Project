@@ -10,6 +10,7 @@ public class jumpscareTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //enable jumpscareCanvas
         jumpscareCanvas.SetActive(true);
 
         if (randomNumber == 0)

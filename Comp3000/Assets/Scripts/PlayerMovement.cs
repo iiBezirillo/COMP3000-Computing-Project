@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         //fetch player collider
         death = GetComponent<Collider>();
 
+        //plays grassFootstep sound
         FindObjectOfType<SoundManager>().Play("grassFootstep");
 
     }
@@ -65,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector3 move = transform.right.normalized * x + transform.forward.normalized * z;
 
         controller.Move(move * speed * Time.deltaTime);
 
@@ -79,14 +80,18 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
+
+        //if you get these key inputs
         if (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d")
            || Input.GetKey("w") && Input.GetKey("a") || Input.GetKey("w") && Input.GetKey("d"))
         {
+            //increase volume to 0.2
             FindObjectOfType<SoundManager>().Fade("grassFootstep", .2f, .2f);
 
         }
         else if (Input.GetKeyUp("w") || Input.GetKeyUp("a") || Input.GetKeyUp("s") || Input.GetKeyUp("d"))
         {
+            //decrease the volume to 0
             FindObjectOfType<SoundManager>().Fade("grassFootstep", .2f, 0f);
         }
 
@@ -117,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
             lastTime = Time.time;
         }
 
-        //if shift is pressed then take speed and add five to run
+        //if shift is pressed then take speed and add three to run
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (speed == 7)
@@ -126,11 +131,13 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
-        //if shift is pressed no more then take speed == 15 and take away 5 to walk
+        //if shift is not pressed 
         else if(Input.GetKeyUp(KeyCode.LeftShift))
         {
+            //if speed is 10 
             if (speed == 10f)
             {
+                //then take three
                 speed = speed - 3f;
             }
         }
